@@ -1,27 +1,20 @@
 [build]
   publish = "."
-  command = ""
 
-[redirects]
-  # Force HTTPS
-  [[redirects]]
-    from = "http://*"
-    to = "https://:host/:splat"
-    status = 301
-    force = true
+# Force HTTPS and add trailing slash fallback
+[[redirects]]
+  from = "http://*"
+  to = "https://:splat"
+  status = 301
+  force = true
 
-  # Root fallback to index.html (not needed unless you use client-side routing)
-  [[redirects]]
-    from = "/*"
-    to = "/index.html"
-    status = 200
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000"
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src * data:;"
+[[redirects]]
+  from = "/es"
+  to = "/es/index.html"
+  status = 301
 
